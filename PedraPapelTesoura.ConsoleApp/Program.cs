@@ -1,24 +1,8 @@
 ﻿using System.Security.Cryptography;
 
-class Program
+class Jogador
 {
-    static void Main(string[] args)
-    {
-        while (true)
-        {
-            Console.Clear();
-
-            int escolhaJogador = ObterEscolhaJogador();
-
-            int escolhaComputador = ObterEscolhaComputador();
-
-            CompararEscolhas(escolhaJogador, escolhaComputador);
-
-            Console.ReadLine();
-        }
-    }
-
-    static int ObterEscolhaJogador()
+    public static int ObterEscolha()
     {
         int escolhaJogador;
 
@@ -46,14 +30,19 @@ class Program
 
         return escolhaJogador;
     }
+}
 
-    static int ObterEscolhaComputador()
+class Computador
+{
+    public static int ObterEscolha()
     {
         return RandomNumberGenerator.GetInt32(1, 4);
     }
+}
 
-
-    static void CompararEscolhas(int escolhaJogador, int escolhaComputador)
+class Jogo
+{
+    public static void CompararEscolhas(int escolhaJogador, int escolhaComputador)
     {
         const int ESCOLHA_PEDRA = 1;
         const int ESCOLHA_PAPEL = 2;
@@ -107,6 +96,25 @@ class Program
                 Console.WriteLine("Papel");
                 Console.WriteLine("Você venceu.");
             }
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.Clear();
+
+            int escolhaJogador = Jogador.ObterEscolha();
+
+            int escolhaComputador = Computador.ObterEscolha();
+
+            Jogo.CompararEscolhas(escolhaJogador, escolhaComputador);
+
+            Console.ReadLine();
         }
     }
 }
